@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-kzxu16pz8kdsl502+pfzip94@)me!o*vgxcmbs@1mb#*tq1&jc
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['cpapservice.azurewebsites.net','http://127.0.0.1:8000/']
 
 
 # Application definition
@@ -76,17 +76,15 @@ WSGI_APPLICATION = 'login.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'HOST' : 'localhost',
-        'PORT' : '3306',
-        'USER' : 'root',
-        'PASSWORD' : '',
-        'NAME' : 'api_cpap',
-        'OPTIONS' : {
-                    "init_command":"SET sql_mode='STRICT_TRANS_TABLES'"
+        "ENGINE": "django.db.backends.postgresql",
+        "HOST":"cpapservice-server.postgres.database.azure.com",
+        "PORT":"5432",
+        "USER":"ucqleiryqt",
+        "PASSWORD":"Cpapservices123#",
+        "NAME":"postgres"
         }
     }
-}
+
 
 
 # Password validation
