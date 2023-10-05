@@ -31,18 +31,18 @@ class UsersView(View):
             users = list(Users.objects.filter(id_u=id_u).values())
             if len(users)>0:
                 user = users[0]
-                data = {"message" : "Completado con éxito" , "users" : users}
+                data = {"message" : "Sucess" , "users" : users}
                 #print(data)
             else:
-                data = {"message":"No existe un usuario con dicha id"}
+                data = {"message":"No user with this ID"}
             return JsonResponse(data)
         else:
             users = list(Users.objects.values())
 
             if len(users)>0:
-                data = {"message" : "Completado con éxito" , "users" : users}
+                data = {"message" : "Sucess" , "users" : users}
             else:
-                data = {"message":"No existe un usuario con dicha id"}
+                data = {"message":"No user with this ID"}
 
             return JsonResponse(data)
 
@@ -50,8 +50,8 @@ class UsersView(View):
         # print(request.body)
         jd = json.loads(request.body)
         # print(jd)
-        Users.objects.create(nombre=jd['nombre'], apellido=jd['apellido'] , identificacion=jd['id_u'], especialidad=jd['especialidad'], contrasena=jd['contrasena'],info_contacto=jd['contacto'],nit_clinica=jd['nit'])
-        data = {"message":"Completado con éxito"}
+        Users.objects.create(nombre=jd['name'], apellido=jd['lastname'] , identificacion=jd['id_u'], especialidad=jd['speciality'], contrasena=jd['password'],info_contacto=jd['contact'],nit_clinica=jd['nit'])
+        data = {"message":"Success"}
         return JsonResponse(data)
 
     def put(self,request,id_u):
@@ -59,28 +59,28 @@ class UsersView(View):
         users = list(Users.objects.filter(id_u=id_u).values())
         if len(users)>0:
             user = Users.objects.get(id_u=id_u)
-            user.nombre=jd['nombre']
-            user.apellido=jd['apellido']
-            user.especialidad=jd['especialidad']
-            user.contrasena=jd['contrasena']
-            user.info_contacto=jd['contacto']
+            user.nombre=jd['name']
+            user.apellido=jd['lastname']
+            user.especialidad=jd['speciality']
+            user.contrasena=jd['passord']
+            user.info_contacto=jd['contact']
             user.nit_clinica=jd['nit']
             user.save()
-            data = {"message":"Completado con éxito"}
+            data = {"message":"Success"}
         else:
-            data = {"message":"No existe un usuario con dicha id"}
+            data = {"message":"No user with this ID"}
         return JsonResponse(data)
 
     def delete(self,request,id_u):
         users = list(Users.objects.filter(id_u=id_u).values())
         if len(users)>0:
             Users.objects.filter(id_u=id_u).delete()
-            data = {"message":"Completado con éxito"}
+            data = {"message":"Sucess"}
         else:
-            data = {"message":"No existe un usuario con dicha id"}
+            data = {"message":"No user with this ID"}
         return JsonResponse(data)
     
-class ClinicasView(View):
+class ClinicsView(View):
 
     @method_decorator(csrf_exempt)
     def dispatch(self, request, *args, **kwargs):
@@ -91,26 +91,26 @@ class ClinicasView(View):
             clinicas = list(Clinicas.objects.filter(code_clinica=code_clinica).values())
             if len(clinicas)>0:
                 clinica = clinicas[0]
-                data = {"message" : "Completado con éxito" , "clinicas" : clinicas}
+                data = {"message" : "Success" , "clinics" : clinicas}
                 #print(data)
             else:
-                data = {"message":"No existe una clinica con dicho rut"}
+                data = {"message":"No clinic with such code"}
             return JsonResponse(data)
         else:
             clinicas = list(Clinicas.objects.values())
 
             if len(clinicas)>0:
-                data = {"message" : "Completado con éxito" , "clinicas" : clinicas}
+                data = {"message" : "Success" , "clinics" : clinicas}
             else:
-                data = {"message":"No existe una clinica con dicho rut"}
+                data = {"message":"No clinic with such code"}
             return JsonResponse(data)
 
     def post(self,request):
         # print(request.body)
         jd = json.loads(request.body)
         # print(jd)
-        Clinicas.objects.create(nit=jd['nit'], nombre_clinica=jd['nombre'] , direccion=jd['direccion'], info_contacto=jd['contacto'])
-        data = {"message":"Completado con éxito"}
+        Clinicas.objects.create(nit=jd['nit'], nombre_clinica=jd['name'] , direccion=jd['address'], info_contacto=jd['contact'])
+        data = {"message":"Success"}
         return JsonResponse(data)
 
     def put(self,request,code_clinica):
@@ -118,22 +118,22 @@ class ClinicasView(View):
         clinicas = list(Clinicas.objects.filter(code_clinica=code_clinica).values())
         if len(clinicas)>0:
             clinica = Clinicas.objects.get(code_clinica=code_clinica)
-            clinica.nombre_clinica=jd['nombre'] 
-            clinica.direccion=jd['direccion']
-            clinica.info_contacto=jd['contacto']
+            clinica.nombre_clinica=jd['name'] 
+            clinica.direccion=jd['address']
+            clinica.info_contacto=jd['contact']
             clinica.save()
-            data = {"message":"Completado con éxito"}
+            data = {"message":"Success"}
         else:
-            data = {"message":"No existe una clinica con dicho rut"}
+            data = {"message":"No clinic with such code"}
         return JsonResponse(data)
 
     def delete(self,request,code_clinica):
         clinicas = list(Clinicas.objects.filter(code_clinica=code_clinica).values())
         if len(clinicas)>0:
             Clinicas.objects.filter(code_clinica=code_clinica).delete()
-            data = {"message":"Completado con éxito"}
+            data = {"message":"Success"}
         else:
-            data = {"message":"No existe una clinica con dicho rut"}
+            data = {"message":"No clinic with such code"}
         return JsonResponse(data)
     
 class CatchUser(View):

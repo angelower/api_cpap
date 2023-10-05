@@ -13,3 +13,4 @@ urllib3==2.0.5
 psycopg2-binary==2.9.7
 python-dotenv==1.0.0
 whitenoise==6.5.0
+djangorestframework~=3.13.0

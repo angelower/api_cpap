@@ -1,11 +1,11 @@
 from django.urls import path
-from .views import UsersView, ClinicasView, PacientesView,CpapView,RegistroView, cpaps, CatchUser, users, exit
+from .views import UsersView, ClinicsView, PacientesView,CpapView,RegistroView, cpaps, CatchUser, users, exit
 
 urlpatterns=[
     path('users/', UsersView.as_view(), name='users_list'),
     path('users/<int:id>' , UsersView.as_view() , name='usuarios_process'),
-    path('clinicas/', ClinicasView.as_view(), name='users_list'),
-    path('clinicas/<int:rut_clinicas>' , ClinicasView.as_view() , name='usuarios_process'),
+    path('clinics/', ClinicsView.as_view(), name='users_list'),
+    path('clinics/<int:rut_clinicas>' , ClinicsView.as_view() , name='usuarios_process'),
     path('pacientes/',PacientesView.as_view(),name='users_list'),
     path('pacientes/<int:id>',PacientesView.as_view(),name='usuarios_process'),
     path('cpaps/',CpapView.as_view(),name='users_list'),
